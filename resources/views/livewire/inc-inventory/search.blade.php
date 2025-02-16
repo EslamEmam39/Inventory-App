@@ -1,7 +1,18 @@
 <div>
-    <form class="d-flex" role="search">
-        <input wire:model.live='search' class="mt-5 mb-3 mw-100 border border-success" type="text" placeholder="Search Name" 
-         aria-label="Search">
-        
-      </form>
-</div>
+    <div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="input-group shadow-sm">
+                <span class="input-group-text bg-primary text-white">
+                    🔍
+                </span>
+                <input type="text" wire:model.live="search" class="form-control form-control-lg rounded" 
+                    placeholder="بحث عن منتج...">
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+  
+  
+  

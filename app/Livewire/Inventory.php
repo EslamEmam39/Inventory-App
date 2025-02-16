@@ -73,9 +73,8 @@ class Inventory extends Component
         }
 
         public function edit($id){
-            $this->productId = $id ; 
-      
             $product = Product::findOrFail($id);
+            $this->productId = $id ; 
             $this->name = $product->name;
             $this->price = $product->price;
             $this->quantity =$product->quantity;

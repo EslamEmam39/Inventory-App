@@ -16,6 +16,8 @@ class SupplierManagement extends Component
 
     public $search;
 
+ 
+
     public function render()
     {
 

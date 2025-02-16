@@ -17,7 +17,7 @@ class PurchaseManagement extends Component
     public function render()
     {
         return view('livewire.purchase-management',[
-            "purchases" => Purchase::with('supplier' ,'product')
+            "purchases" => Purchase::latest()->with('supplier' ,'product')
             ->whereHas('product', fn($query) 
             => $query->where('name', 'like', "%{$this->search}%"))
             ->paginate(5),
@@ -47,9 +47,20 @@ class PurchaseManagement extends Component
         // تحديث المخزون
         $product = Product::find($this->product_id);
         $product->increment('quantity', $this->quantity);
+        // $product->update(['price' => $this->price]);
 
         session()->flash('message', '✅ تم إضافة عملية الشراء بنجاح!');
         $this->resetFields();
+    }
+
+    public function deletePurch(Purchase $purchase){
+        try{
+                $purchase->delete();
+            session()->flash('message', '✅ تم حذف المنتج بنجاح!');
+        }catch(\Exception $e){
+            session()->flash('message', '❌ حدث خطأ أثناء حذف المنتج.');
+        }
+    
     }
     private function resetFields()
     {

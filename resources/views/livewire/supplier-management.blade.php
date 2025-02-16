@@ -1,44 +1,56 @@
-<div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <!-- العنوان -->
+            <h2 class="mb-4 text-center text-primary fw-bold">📌 إدارة الموردين</h2>
 
-
-    <div>
-        <div class="mask d-flex align-items-center h-100 mb-5 mt-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-lg-10">
-                        <div class="card" style="border-radius: 1rem;">
-                            <div class="card-body p-5">
-
-                                <h1 class="mb-5 text-center">Add Supplier management</h1>
-                                @include('livewire.inc-supplier.search')
-                                @include('livewire.inc-supplier.create')
-                                @include('livewire.inc-supplier.search')
-                            </div>
-                        </div>
-                    </div>
+            <!-- إدخال المورد الجديد -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    @include('livewire.inc-supplier.create')
                 </div>
             </div>
+
+            <!-- البحث عن الموردين -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    @include('livewire.inc-supplier.search')
+                </div>
+            </div>
+
+            <!-- جدول عرض الموردين -->
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered text-center align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>📛 اسم المورد</th>
+                                    <th>📞 رقم الهاتف</th>
+                                    <th>📧 البريد الإلكتروني</th>
+                                    <th>⚙️ الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($suppliers as $supplier)
+                                    @include('livewire.inc-supplier.show')
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-danger fw-bold py-4">
+                                            🚫 لا توجد بيانات لعرضها
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- روابط التصفح -->
+                    <div class="d-flex justify-content-center mt-3">
+                        {{ $suppliers->links('pagination::bootstrap-5') }}
+                    </div>
+                </div>
+            </div> <!-- نهاية كارد الجدول -->
         </div>
-
-
-
-        <table class="table table-bordered table-striped table-hover">
-
-            <tr>
-                <th>الاسم</th>
-                <th>الهاتف</th>
-                <th>البريد الإلكتروني</th>
-                <th>الإجراءات</th>
-            </tr>
-
-            @forelse ($suppliers as $supplier)
-                @include('livewire.inc-supplier.show')
-            @empty
-                <tr>
-                    <td colspan="4">🚫 لا توجد منتجات لعرضها</td>
-                </tr>
-            @endforelse
-        </table>
-
-        {{ $suppliers->links() }}
     </div>
+</div>
