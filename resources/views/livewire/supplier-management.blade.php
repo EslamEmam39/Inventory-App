@@ -1,24 +1,24 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <!-- العنوان -->
+     
             <h2 class="mb-4 text-center text-primary fw-bold">📌 إدارة الموردين</h2>
 
-            <!-- إدخال المورد الجديد -->
+       
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
                     @include('livewire.inc-supplier.create')
                 </div>
             </div>
 
-            <!-- البحث عن الموردين -->
+           
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
                     @include('livewire.inc-supplier.search')
                 </div>
             </div>
 
-            <!-- جدول عرض الموردين -->
+       
             <div class="card shadow-lg">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -27,7 +27,7 @@
                                 <tr>
                                     <th>📛 اسم المورد</th>
                                     <th>📞 رقم الهاتف</th>
-                                    <th>📧 البريد الإلكتروني</th>
+                                    {{-- <th>📧 البريد الإلكتروني</th> --}}
                                     <th>⚙️ الإجراءات</th>
                                 </tr>
                             </thead>
@@ -45,12 +45,12 @@
                         </table>
                     </div>
 
-                    <!-- روابط التصفح -->
+                     
                     <div class="d-flex justify-content-center mt-3">
                         {{ $suppliers->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
-            </div> <!-- نهاية كارد الجدول -->
+            </div>  
         </div>
     </div>
 </div>

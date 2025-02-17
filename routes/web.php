@@ -8,7 +8,7 @@ use App\Livewire\SupplierManagement;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 Route::get('/dashboard', Dashboard::class)->name('dashboard');
 Route::get('/inventory', Inventory::class)->name('inventory');

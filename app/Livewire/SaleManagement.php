@@ -15,16 +15,16 @@ class SaleManagement extends Component
     public $search;
 
     public $saleID;
-     public function render()
-    {
-        return view('livewire.sale-management' ,[
-            'sales' => Sale::with('product')
-            ->whereHas( 'product',fn($query) => 
-            $query->where('name' , 'like', "%{$this->search}%"))
-            ->paginate(5),
+    public function render()
+    { 
+        return view('livewire.sale-management', [
+            'sales' => Sale::latest()->with('product')
+                ->whereHas('product', fn($query) => 
+                    $query->where('name', 'like', "%{$this->search}%")
+                )
+                ->paginate(5),
             'products' => Product::all(),
-        ]) ;
-      
+        ]);
     }
 
     public function addSale()
@@ -50,39 +50,61 @@ class SaleManagement extends Component
             'sale_date' => $this->sale_date,
         ]);
 
-        // تحديث المخزون
+
+       
         $product->decrement('quantity', $this->quantity);
 
         session()->flash('message', '✅ تم إضافة عملية البيع بنجاح!');
         $this->resetFields();
     }
+    public function updatedProductId($value): void
+    {
+        // dd($value); 
+        if ($value) {
+            $product = Product::find( $value);
+            $this->price = $product ? $product->priceSale : null;
+      
+            // dd($this->price);
+        }
 
-
+    }
     public function editSale($id){
         $sale = Sale::findOrFail($id);
         $this->saleID = $id ;
-        $this->product_id = $sale->product->name ;
+        $this->product_id = $sale->product->id ;
         $this->quantity = $sale->quantity ;
         $this->price = $sale->price ;
         $this->sale_date = $sale->sale_date;
     }
+ 
 
     public function updateSale(){
-        $sale = Product::findOrFail($this->saleID);
+        $sale = Sale::findOrFail($this->saleID);
               
         $this->validate([
-            'product_id' => 'required|string|max:255',
-            'price' => 'required|numeric|min:1',
+            'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:1',
+            'sale_date' => 'required|date',
         ]);
+        $oldQuantity = $sale->quantity;
+        $product = Product::findOrFail($this->product_id);
 
-         $sale->update([
-        'product_id' =>$this->product_id,
-        'price' =>$this->price,
-        'quantity' =>$this->quantity,
-        'sale_date' =>$this->sale_date,
-    
-      ]);
+        if ($this->quantity > ($product->quantity + $oldQuantity)) {
+            session()->flash('error', '❌ الكمية المطلوبة غير متاحة في المخزون!');
+            return;
+        }
+        $product->increment('quantity', $oldQuantity);
+
+
+    $sale->update([
+            'product_id' => $this->product_id,
+            'quantity' => $this->quantity,
+            'price' => $this->price,
+            'sale_date' => $this->sale_date,
+        ]);
+        
+        $product->decrement('quantity', $this->quantity);
       
    
       $this->resetFields();
@@ -91,14 +113,18 @@ class SaleManagement extends Component
   }
 
   public function deleteSale(Sale $sale){
-    try{
-            $sale->delete();
-        session()->flash('message', '✅ تم حذف المنتج بنجاح!');
-    }catch(\Exception $e){
-        session()->flash('message', '❌ حدث خطأ أثناء حذف المنتج.');
-    }
+    try {
+         $product = Product::find($sale->product_id);
+        if ($product) {
+            $product->increment('quantity', $sale->quantity);
+        }
 
-}
+        $sale->delete();
+        session()->flash('message', '✅ تم حذف عملية البيع بنجاح!');
+    } catch (\Exception $e) {
+        session()->flash('message', '❌ حدث خطأ أثناء حذف عملية البيع.');
+    }
+    }
 
       public function resetFields()
     {

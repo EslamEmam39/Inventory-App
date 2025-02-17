@@ -1,8 +1,8 @@
 <div class="container mt-4">
-  <!-- نموذج إضافة منتج -->
+ 
   @include('livewire.inc-inventory.create')
 
-  <!-- نموذج البحث -->
+ 
   @include('livewire.inc-inventory.search')
 
   <h3 class="mt-4">📜 قائمة المنتجات</h3>
@@ -13,8 +13,10 @@
               <tr>
                   <th>اسم المنتج</th>
                   <th>السعر</th>
+                  <th>السعر للبيع</th>
                   <th>الكمية</th>
                   <th>التصنيف</th>
+                  <th>التفاصيل</th>
                   <th>المورد</th>
                   <th>الإجراءات</th>
               </tr>
@@ -30,8 +32,7 @@
           </tbody>
       </table>
   </div>
-
-  <!-- Pagination -->
+ 
   <div class="d-flex justify-content-center mt-3">
       {{ $products->links('pagination::bootstrap-5') }}
   </div>

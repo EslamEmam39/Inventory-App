@@ -8,7 +8,7 @@
                         <input type="number" wire:model="phone" class="form-control" placeholder="رقم الهاتف">
                     </td>
                     <td>
-                        <input type="email" wire:model="email" class="form-control" placeholder="البريد الإلكتروني">
+                        {{-- <input type="email" wire:model="email" class="form-control" placeholder="البريد الإلكتروني"> --}}
                     </td>
                     <td>
                         <button wire:click='resetFields' type="button" class="btn btn-sm btn-danger">إلغاء</button>
@@ -17,7 +17,7 @@
                 @else
                     <td>{{ $supplier->name }}</td>
                     <td>{{ $supplier->phone }}</td>
-                    <td>{{ $supplier->email }}</td>
+                    {{-- <td>{{ $supplier->email }}</td> --}}
                     <td>
                         <button wire:click='deleteSupplier({{ $supplier->id }})' type="button" class="btn btn-sm btn-danger">حذف</button>
                         <button wire:click='editSupplier({{ $supplier->id }})' type="button" class="btn btn-sm btn-success">تعديل</button>

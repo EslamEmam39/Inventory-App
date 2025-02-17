@@ -1,8 +1,7 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
-
-            <!-- تنبيهات -->
+            
             @if (session()->has('message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     ✅ {{ session('message') }}
@@ -10,7 +9,7 @@
                 </div>
             @endif
 
-            @if ($lowStockWarning)
+            @if ($lowStockWarning  )
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     ⚠️ بعض المنتجات بها مخزون منخفض!
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -28,7 +27,7 @@
                 </div>
             @endif
 
-            <!-- كارد النموذج -->
+         
             <div class="card shadow-lg">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0 text-center">📦 إدارة المخزون</h5>
@@ -51,6 +50,14 @@
                                     <label for="productPrice">السعر</label>
                                 </div>
                             </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="number" wire:model="priceSale" class="form-control" id="productPrice"
+                                        placeholder="السعر">
+                                    <label for="productPrice">السعر للبيع</label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -64,18 +71,30 @@
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" wire:model="category" class="form-control"
-                                        id="productCategory" placeholder="التصنيف">
-                                    <label for="productCategory">التصنيف</label>
+                                    <textarea type="text" wire:model="details" class="form-control" id="productPrice"
+                                        placeholder="السعر" > </textarea>
+                                    <label for="productPrice"> التفاصيل</label>
                                 </div>
                             </div>
                         </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <select wire:model="category_id" class="form-select" id=" ">
+                                        <option disabled selected value="">اختر التصنيف</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>                
+                                    <label for="productCategory">التصنيف</label>
+                                </div>
+                            </div>
 
+                            
                         <div class="form-floating mb-3">
                             <select wire:model="supplier_id" class="form-select" id="productSupplier">
-                                <option value="">اختر المورد</option>
+                                <option disabled accesskey="" selected value="">اختر المورد</option>
                                 @foreach ($suppliers as $supplier)
-                                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                    <option value="{{ $supplier->id}}">{{ $supplier->name}}</option>
                                 @endforeach
                             </select>
                             <label for="productSupplier">المورد</label>
@@ -88,8 +107,7 @@
                         </div>
                     </form>
                 </div>
-            </div> <!-- نهاية كارد النموذج -->
-
+            </div> 
         </div>
     </div>
 </div>

@@ -20,12 +20,12 @@
                     <label class="form-label fw-bold">الكمية</label>
                     <input type="number" wire:model="quantity" class="form-control" placeholder="🔢 أدخل الكمية">
                 </div>
-
+            
                 <div class="col-md-3 mb-3">
                     <label class="form-label fw-bold">سعر البيع</label>
-                    <input type="number" wire:model="price" class="form-control" placeholder="💰 أدخل السعر">
-                </div>
-
+                      <input type="number" wire:model="price"   class="form-control" >
+                      </div>
+               
                 <div class="col-md-2 mb-3">
                     <label class="form-label fw-bold">📅 تاريخ البيع</label>
                     <input type="date" wire:model="sale_date" class="form-control">
@@ -50,6 +50,7 @@
     @if (session()->has('error'))
         <div class="alert alert-danger mt-3">{{ session('error') }}</div>
     @endif
+
     @if ($errors->any())
         <div class="alert alert-danger mt-3">
             <ul>
@@ -78,13 +79,24 @@
                <tr>
                 @if ($saleID === $sale->id)
                 <td>
-                    <input type="text" wire:model="product_id" class="form-control" placeholder="المنتح">
+                 
+                    <select wire:model="product_id" class="form-control">
+                            <option readonly disabled    value="">🔽 اختر المنتج</option>
+                            @foreach ($products as $product)
+                                <option value="{{ $product->id }}">
+                                    {{ $product->name }} (المتوفر: {{ $product->quantity }})
+                                </option>
+                            @endforeach
+                        </select>
                 </td>
                 <td>
-                    <input type="number" wire:model="quantity" class="form-control" placeholder=" الكمية">
+                    
+                    <input type="number" wire:model="quantity" class="form-control" placeholder=" الكمية" 
+                    value=""> 
                 </td>
                 <td>
-                    <input type="numder" wire:model="price" class="form-control" placeholder="سعر البيع">
+                    <input type="number"  wire:model="price" class="form-control" placeholder="سعر البيع">
+                    
                 </td>
                 <td>
                     <input type="date" wire:model="sale_date" class="form-control" placeholder="تاريخ البيع">
@@ -99,7 +111,7 @@
                    
                         <td class="fw-bold">{{ $sale->product->name }}</td>
                         <td>{{ $sale->quantity }}</td>
-                        <td>{{ number_format($sale->price, 2) }} ج.م</td>
+                        <td>{{ ($sale->price * $sale->quantity ) }} ج.م</td>
                         <td>{{ $sale->sale_date }}</td>
                         <td>
                             <button wire:click="editSale({{ $sale->id }})" class="btn btn-warning btn-sm">✏️ تعديل</button>

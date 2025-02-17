@@ -7,7 +7,7 @@
 
     <title>Livewire tutorial: counter</title>
 
-    <!-- Fonts -->
+    
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -32,9 +32,9 @@
 
             <a class="navbar-brand" href="#">Navbar</a>
             <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
-            </button>
+              </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="{{ route('dashboard') }}">Dashboard</a>
@@ -42,7 +42,7 @@
                     <a class="nav-link" href="{{ route('inventory') }}">Inventory</a>
                     <a class="nav-link" href="{{ route('purchases') }}">Purchases</a>
                     <a class="nav-link" href="{{ route('sales') }}">Sales</a>
-                    <a class="nav-link disabled">Disabled</a>
+                   
                 </div>
             </div>
     </nav>
@@ -50,7 +50,7 @@
 
     <div class="container">
 
-        {{ $slot }} <!-- ✅ هذا هو المطلوب بدلاً من   -->
+        {{ $slot }} 
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"

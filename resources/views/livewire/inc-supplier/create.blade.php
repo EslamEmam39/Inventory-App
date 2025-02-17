@@ -2,7 +2,7 @@
   <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <!-- تنبيهات -->
+            
             @if (session()->has('message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('message') }}
@@ -21,7 +21,7 @@
                 </div>
             @endif  
   
-            <!-- كارد النموذج -->
+          
             <div class="card shadow-lg">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0 text-center">إضافة مورد جديد</h5>
@@ -43,11 +43,11 @@
                                 </div>
                             </div>
                         </div>
-  
+{{--   
                         <div class="form-floating mb-3">
                             <input type="email" wire:model="email" class="form-control" id="emailAddress" placeholder="البريد الإلكتروني">
                             <label for="emailAddress">البريد الإلكتروني</label>
-                        </div>
+                        </div> --}}
   
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary btn-lg px-4">
@@ -56,7 +56,7 @@
                         </div>
                     </form>
                 </div>
-            </div> <!-- نهاية كارد النموذج -->
+            </div>  
         </div>
     </div>
   </div>

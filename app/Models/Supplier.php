@@ -11,13 +11,13 @@ class Supplier extends Model
 
     protected $fillable = ['name', 'phone', 'email'];
 
-    // علاقة المورد بالمنتجات
+ 
     public function products()
     {
         return $this->hasMany(Product::class);
     }
 
-    // علاقة المورد بالمشتريات
+ 
     public function purchases()
     {
         return $this->hasMany(Purchase::class);

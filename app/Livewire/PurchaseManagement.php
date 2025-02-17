@@ -44,7 +44,7 @@ class PurchaseManagement extends Component
             'purchase_date' => $this->purchase_date,
         ]);
 
-        // تحديث المخزون
+ 
         $product = Product::find($this->product_id);
         $product->increment('quantity', $this->quantity);
         // $product->update(['price' => $this->price]);

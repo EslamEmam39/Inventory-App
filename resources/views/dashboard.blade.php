@@ -1,40 +1,64 @@
-{{--  
-<div class="dashboard">
-    <nav>
-        <ul>
-            <li><a href="{{ route('suppliers') }}">🏢 إدارة الموردين</a></li>
-            <li><a href="{{ route('purchases') }}">🛒 إدارة المشتريات</a></li>
-            <li><a href="{{ route('sales') }}">💰 إدارة المبيعات</a></li>
-            <li><a href="{{ route('inventory') }}">📦 إدارة المخزون</a></li>
-        </ul>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Livewire tutorial: counter</title>
+
+    
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    @livewireStyles
+
+
+
+    <style>
+        body {
+            font-family: 'Nunito';
+        }
+    </style>
+
+
+</head>
+
+<body class="antialiased">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary border-bottom">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="{{ route('dashboard') }}">Dashboard</a>
+                    <a class="nav-link" href="{{ route('suppliers') }}">Suppliers</a>
+                    <a class="nav-link" href="{{ route('inventory') }}">Inventory</a>
+                    <a class="nav-link" href="{{ route('purchases') }}">Purchases</a>
+                    <a class="nav-link" href="{{ route('sales') }}">Sales</a>
+                   
+                </div>
+            </div>
     </nav>
-    <h2>📊 لوحة التحكم</h2>
 
-    <div class="stats">
-        <div class="card">
-            <h3>📦 عدد المنتجات</h3>
-            <p>{{ \App\Models\Product::count() }}</p>
-        </div>
 
-        <div class="card">
-            <h3>🏢 عدد الموردين</h3>
-            <p>{{ \App\Models\Supplier::count() }}</p>
-        </div>
+@extends('livewire.dashboard')
 
-        <div class="card">
-            <h3>💰 إجمالي المبيعات</h3>
-            <p>{{ \App\Models\Sale::sum('price') }} جنيه</p>
-        </div>
 
-        <div class="card">
-            <h3>🚨 المنتجات منخفضة المخزون</h3>
-            <ul>
-                @foreach (\App\Models\Product::where('quantity', '<', 5)->get() as $product)
-                    <li>{{ $product->name }} ({{ $product->quantity }})</li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-</div>
- 
-  --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+</script>
+@livewireScripts
+
+</body>
+
+</html>

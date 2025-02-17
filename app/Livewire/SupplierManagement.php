@@ -33,14 +33,14 @@ class SupplierManagement extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
+            // 'email' => 'required|email|max:255',
         ]);
 // dd('hi');
 // die();
         Supplier::create([
             'name' => $this->name,
             'phone' => $this->phone,
-            'email' => $this->email,
+            // 'email' => $this->email,
         ]);
 
         session()->flash('message', '✅ تم إضافة المورد بنجاح!');
@@ -56,6 +56,8 @@ class SupplierManagement extends Component
         $this->phone = $supplier->phone;
         $this->email = $supplier->email;
     }
+    // dd('hi');
+    // die();
     public function updateSupplier()
     {
         $supplier = Supplier::findOrFail($this->supplierId);

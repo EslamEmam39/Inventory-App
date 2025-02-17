@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
 use Exception;
@@ -14,21 +15,26 @@ class Inventory extends Component
 
   use WithPagination;
 
-    public $name, $price, $quantity, $category;
-    public $search;
+    public $name, $price, $quantity, $category ,$priceSale ,$category_id ,$details;
   public $productId;
+  public $categories;
   public $supplier_id;
- 
+  public $search;
   public $lowStockWarning = false;
    
     public function render()
     {
         $products = Product::latest()
-        ->where('name', 'like', "%{$this->search}%")
+        ->whereHas('supplier', fn($query) => 
+        $query->Where('name' , 'like',"%{$this->search}%") )
+        ->orWhere('price', 'like', "%{$this->search}%")
+        ->orWhere('name', 'like', "%{$this->search}%")
+        ->with('supplier' ,'category')
         ->paginate(5);
-    // التحقق من المنتجات ذات المخزون المنخفض
+    $suppliers= Supplier::all();
+    $this->categories= Category::all();
         $this->checkLowStock($products);
-    $suppliers = Supplier::all();
+ 
     return view('livewire.inventory', compact('products','suppliers'));
     }
 
@@ -43,20 +49,22 @@ class Inventory extends Component
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:1',
             'quantity' => 'required|integer|min:1',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|string|max:255',
+            'priceSale' => 'required|string|max:255',
+            'supplier_id' => 'required|string|max:255'
+           
         ]);
-        //  dd('hi');
-        //  die();
-        if($this->quantity < 5){
-            session()->flash('warning', '⚠️ تحذير: الكمية أقل من 5!');
-          }
+      
         Product::create([
             'name' => $this->name,
             'price' => $this->price,
             'quantity' => $this->quantity,
-            'category' => $this->category,
             'supplier_id' => $this->supplier_id,
+            'priceSale' => $this->priceSale,
+            'category_id' => $this->category_id,
+            'details' => $this->details
         ]);
+      
 
         session()->flash('message', '✅ تم إضافة المنتج بنجاح!');
 
@@ -79,12 +87,15 @@ class Inventory extends Component
             $this->price = $product->price;
             $this->quantity =$product->quantity;
             $this->category = $product->category;
+            $this->details = $product->details;
             $this->supplier_id = $product->supplier_id;
+            $this->priceSale = $product->priceSale;
+            $this->category_id= $product->category_id;
         }
 
         public function cancel( ){
 
-              $this->reset('productId' , 'name','price','quantity','category');
+              $this->reset('productId' , 'name','price','quantity','category','priceSale');
         }
         public function update( ){
             $product = Product::findOrFail($this->productId);
@@ -92,21 +103,23 @@ class Inventory extends Component
             $this->validate([
                 'name' => 'required|string|max:255',
                 'price' => 'required|numeric|min:1',
+                'priceSale' => 'required|numeric|min:1',
                 'quantity' => 'required|integer|min:1',
-                'category' => 'required|string|max:255',
+                'category_id' => 'required|string|max:255',
+                 
             ]);
 
              $product->update([
             'name' =>$this->name,
             'price' =>$this->price,
             'quantity' =>$this->quantity,
-            'category' =>$this->category,
-            'supplier_id' => $this->supplier_id,
+            'category_id' =>$this->category_id,
+            'supplier_id' => $this->supplier_id, 
+            'priceSale' => $this->priceSale,
+            'details' => $this->details,
+            
+            
           ]);
-          
-          if($this->quantity < 5){
-            session()->flash('warning', '⚠️ تحذير: الكمية أقل من 5!');
-          }
           $this->cancel();
 
           session()->flash('message', '✅ تم تعديل المنتج بنجاح!');
@@ -114,7 +127,8 @@ class Inventory extends Component
 
     private function resetFields()
     {
-        $this->name = $this->price = $this->quantity = $this->category = null;
+        $this->name = $this->price = $this->quantity  
+        = $this->priceSale  = $this->details = $this->category_id= null ;
          
     }
 }

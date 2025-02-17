@@ -1,5 +1,6 @@
 <div class="container mt-4">
     <h2 class="text-center mb-4">🛒 إدارة المشتريات</h2>
+    
     @if (session()->has('message'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('message') }}
@@ -17,7 +18,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif  
-    <!-- فورم إضافة المشتريات -->
+ 
     <form wire:submit.prevent="addPurchase" class="p-4 border rounded shadow-sm bg-light">
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -59,6 +60,8 @@
         <button type="submit" class="btn btn-primary w-100">➕ إضافة المشتريات</button>
     </form>
 
+  
+    <h2 class="text-left mb-4">🛒 عرض المشتريات</h2>
     <!-- 🔍 حقل البحث -->
     <div class="mt-4">
         <input type="text" wire:model.live="search" class="form-control border-success rounded shadow-sm" 
@@ -66,6 +69,7 @@
     </div>
 
     <!-- 📜 جدول عرض المشتريات -->
+  
     <div class="table-responsive mt-4">
         <table class="table table-striped table-bordered text-center align-middle">
             <thead class="table-dark">

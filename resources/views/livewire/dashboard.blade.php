@@ -40,7 +40,7 @@
           </div>
       </div>
   
-      <!-- المنتجات منخفضة المخزون -->
+ 
       <div class="row mt-4">
           <div class="col-md-6 mx-auto">
               <div class="card shadow-sm">
