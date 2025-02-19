@@ -105,8 +105,6 @@ class Inventory extends Component
                 'price' => 'required|numeric|min:1',
                 'priceSale' => 'required|numeric|min:1',
                 'quantity' => 'required|integer|min:1',
-                'category_id' => 'required|string|max:255',
-                 
             ]);
 
              $product->update([

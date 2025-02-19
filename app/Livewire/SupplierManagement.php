@@ -33,14 +33,13 @@ class SupplierManagement extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            // 'email' => 'required|email|max:255',
         ]);
 // dd('hi');
 // die();
         Supplier::create([
             'name' => $this->name,
             'phone' => $this->phone,
-            // 'email' => $this->email,
+            
         ]);
 
         session()->flash('message', '✅ تم إضافة المورد بنجاح!');
@@ -54,7 +53,7 @@ class SupplierManagement extends Component
         $this->supplierId = $id;
         $this->name = $supplier->name;
         $this->phone = $supplier->phone;
-        $this->email = $supplier->email;
+       
     }
     // dd('hi');
     // die();
@@ -65,7 +64,7 @@ class SupplierManagement extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
+             
         ]);
 
         $supplier->update([
@@ -80,9 +79,9 @@ class SupplierManagement extends Component
     public function deleteSupplier(Supplier $supplier){
         try{
                 $supplier->delete();
-            session()->flash('message', '✅ تم حذف المنتج بنجاح!');
+            session()->flash('message', '✅ تم حذف المورد بنجاح!');
         }catch(Exception $e){
-            session()->flash('message', '❌ حدث خطأ أثناء حذف المنتج.');
+            session()->flash('message', '❌ حدث خطأ أثناء حذف المورد.');
         }
 
     }

@@ -80,7 +80,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
                                     <select wire:model="category_id" class="form-select" id=" ">
-                                        <option disabled selected value="">اختر التصنيف</option>
+                                 
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
@@ -92,7 +92,7 @@
                             
                         <div class="form-floating mb-3">
                             <select wire:model="supplier_id" class="form-select" id="productSupplier">
-                                <option disabled accesskey="" selected value="">اختر المورد</option>
+                           
                                 @foreach ($suppliers as $supplier)
                                     <option value="{{ $supplier->id}}">{{ $supplier->name}}</option>
                                 @endforeach

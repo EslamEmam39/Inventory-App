@@ -39,6 +39,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="{{ route('dashboard') }}">Dashboard</a>
                     <a class="nav-link" href="{{ route('suppliers') }}">Suppliers</a>
+                    <a class="nav-link" href="{{ route('categories') }}">categories</a>
                     <a class="nav-link" href="{{ route('inventory') }}">Inventory</a>
                     <a class="nav-link" href="{{ route('purchases') }}">Purchases</a>
                     <a class="nav-link" href="{{ route('sales') }}">Sales</a>

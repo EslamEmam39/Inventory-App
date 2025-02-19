@@ -56,9 +56,9 @@ class PurchaseManagement extends Component
     public function deletePurch(Purchase $purchase){
         try{
                 $purchase->delete();
-            session()->flash('message', '✅ تم حذف المنتج بنجاح!');
+            session()->flash('message', '✅ تم حذف عملية الشراء بنجاح!');
         }catch(\Exception $e){
-            session()->flash('message', '❌ حدث خطأ أثناء حذف المنتج.');
+            session()->flash('message', '❌ حدث خطأ أثناء حذف عملية الشراء.');
         }
     
     }

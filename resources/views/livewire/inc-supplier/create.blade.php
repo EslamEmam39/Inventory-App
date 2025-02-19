@@ -43,12 +43,7 @@
                                 </div>
                             </div>
                         </div>
-{{--   
-                        <div class="form-floating mb-3">
-                            <input type="email" wire:model="email" class="form-control" id="emailAddress" placeholder="البريد الإلكتروني">
-                            <label for="emailAddress">البريد الإلكتروني</label>
-                        </div> --}}
-  
+ 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary btn-lg px-4">
                                 <i class="fas fa-plus"></i> إضافة المورد

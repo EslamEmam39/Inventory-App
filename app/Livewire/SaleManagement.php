@@ -109,7 +109,7 @@ class SaleManagement extends Component
    
       $this->resetFields();
 
-      session()->flash('message', '✅ تم تعديل المنتج بنجاح!');
+      session()->flash('message', '✅ تم تعديل  عملية البيع بنجاح!');
   }
 
   public function deleteSale(Sale $sale){

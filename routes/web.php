@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\CategoryManagement;
 use App\Livewire\Dashboard;
 use App\Livewire\Inventory;
 use App\Livewire\PurchaseManagement;
@@ -15,3 +16,4 @@ Route::get('/inventory', Inventory::class)->name('inventory');
 Route::get('/suppliers', SupplierManagement::class)->name('suppliers');
 Route::get('/purchases', PurchaseManagement::class)->name('purchases');
 Route::get('/sales', SaleManagement::class)->name('sales');
+Route::get('/categories', CategoryManagement::class)->name('categories');

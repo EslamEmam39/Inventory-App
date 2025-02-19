@@ -1,4 +1,4 @@
-<div class="container mt-5">
+{{-- <div class="container mt-5">
     <h2 class="text-center mb-4">💰 إدارة المبيعات</h2>
 
     <div class="card p-4 shadow-sm">
@@ -132,4 +132,16 @@
     <div class="d-flex justify-content-center">
         {{ $sales->links() }}
     </div>
+</div> --}}
+
+
+<div>
+@include('livewire.inc-sale.create')
+
+ 
+@include('livewire.inc-sale.search')
+
+@include('livewire.inc-sale.show')
+
+
 </div>
